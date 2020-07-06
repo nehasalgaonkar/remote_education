@@ -1,7 +1,6 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.urls import reverse
 from . models import *
 
 # Create your views here.
@@ -12,10 +11,7 @@ def index(request):
 	user_obj = User.objects.get(username = request.user.username)
 	user_role = UserRole.objects.get(user_id = user_obj)
 	user_role_info = user_role.role_id.name
-	if user_role_info == 'teacher':
-		return render(request,'video_chatt_app/home.html',{'user_role_info':user_role_info})
-	else:
-		return redirect('/join_meeting/')
+	return render(request,'video_chatt_app/home.html',{'user_role_info':user_role_info})
 
 
 # def client(request,room_name):
